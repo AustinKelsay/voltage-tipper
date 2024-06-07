@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import TippingForm from "./TippingForm";
 import TippingDisplay from "./TippingDisplay";
+import PastTips from "./PastTips";
 import { useToast } from "@/hooks/useToast";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
@@ -10,7 +11,7 @@ const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON;
 const TippingComponent = () => {
     const [invoice, setInvoice] = useState("");
     const [listenTimer, setListenTimer] = useState(3600);
-    
+
     const pollingIntervalRef = useRef(null);
     const timerIntervalRef = useRef(null);
 
@@ -67,12 +68,14 @@ const TippingComponent = () => {
     return (
         <div className="w-[50vw] flex flex-col justify-center p-4">
             <TippingForm setInvoice={setInvoice} invoice={invoice} startPolling={startPolling} />
-            {invoice && (
+            {invoice ? (
                 <TippingDisplay
                     invoice={invoice}
                     listenTimer={listenTimer}
                     formatTime={formatTime}
                 />
+            ) : (
+                <PastTips />
             )}
         </div>
     );
