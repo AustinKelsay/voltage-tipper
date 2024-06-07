@@ -11,23 +11,30 @@ const PastTips = () => {
     const [tips, setTips] = useState([]);
 
     useEffect(() => {
-        axios.get(`${HOST}/v1/invoices`, {
-            headers: {
-                "Grpc-Metadata-macaroon": INVOICE_MACAROON
-            }
-        }).then((res) => {
-            if (res.data.invoices && res.data.invoices.length > 0) {
-                res.data.invoices.forEach((inv) => {
-                    if (res.data.invoices && res.data.invoices.length > 0) {
-                        const filteredTips = res.data.invoices.filter(inv => inv.memo.includes("voltage-tipper"));
-                        const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
-                        setTips(sortedTips);
-                    }
-                });
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
+        const fetchTips = () => {
+            axios.get(`${HOST}/v1/invoices`, {
+                headers: {
+                    "Grpc-Metadata-macaroon": INVOICE_MACAROON
+                }
+            }).then((res) => {
+                if (res.data.invoices && res.data.invoices.length > 0) {
+                    const filteredTips = res.data.invoices.filter(inv => inv.memo.includes("voltage-tipper"));
+                    const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
+                    setTips(sortedTips);
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        };
+
+        // Fetch tips immediately when component mounts
+        fetchTips();
+
+        // Set interval to fetch tips every 5 seconds
+        const intervalId = setInterval(fetchTips, 5000);
+
+        // Clear interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
