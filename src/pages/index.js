@@ -7,6 +7,7 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export default function Home() {
   const [nodeInfo, setNodeInfo] = useState({});
+  
   useEffect(() => {
     axios.get(`${HOST}/v1/getinfo`, {
       headers: {
