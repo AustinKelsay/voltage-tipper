@@ -10,6 +10,7 @@ const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON;
 const TippingComponent = () => {
     const [invoice, setInvoice] = useState("");
     const [listenTimer, setListenTimer] = useState(3600);
+    
     const pollingIntervalRef = useRef(null);
     const timerIntervalRef = useRef(null);
 

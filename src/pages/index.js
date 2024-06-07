@@ -7,7 +7,7 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 
 export default function Home() {
   const [nodeInfo, setNodeInfo] = useState({});
-  
+
   useEffect(() => {
     axios.get(`${HOST}/v1/getinfo`, {
       headers: {
@@ -27,7 +27,7 @@ export default function Home() {
       {
         nodeInfo?.alias && (
           <>
-            <h1 className="text-4xl font-bold">{nodeInfo?.alias} tipping page</h1>
+            <h1 className="text-4xl font-bold">{nodeInfo?.alias}&apos;s tipping page</h1>
             <TippingComponent />
           </>
         )
