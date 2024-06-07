@@ -1,5 +1,5 @@
 import { bech32 } from 'bech32';
-import { runMiddleware, corsMiddleware } from "@/utils/middleware";
+import { runMiddleware, corsMiddleware } from "@/utils/corsMiddleware";
 
 function encodeLnurl(url) {
     const words = bech32.toWords(Buffer.from(url, 'utf8'));

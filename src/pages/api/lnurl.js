@@ -1,8 +1,8 @@
-import { runMiddleware, corsMiddleware } from "@/utils/middleware";
+import { runMiddleware, corsMiddleware } from "@/utils/corsMiddleware";
 
 export default async function handler(req, res) {
     await runMiddleware(req, res, corsMiddleware);
-    
+
    const metadata = [
        ["text/plain", "Sample LN-ADDRESS endpoint"]
    ];

@@ -1,6 +1,6 @@
 import axios from "axios"
 import crypto from "crypto"
-import { runMiddleware, corsMiddleware } from "@/utils/middleware";
+import { runMiddleware, corsMiddleware } from "@/utils/corsMiddleware";
 
 const HOST = process.env.NEXT_PUBLIC_HOST
 const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON
