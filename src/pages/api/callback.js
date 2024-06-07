@@ -1,10 +1,12 @@
 import axios from "axios"
 import crypto from "crypto"
+import { runMiddleware, corsMiddleware } from "@/utils/middleware";
 
 const HOST = process.env.NEXT_PUBLIC_HOST
 const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON
 
 export default async function handler(req, res) {
+    await runMiddleware(req, res, corsMiddleware);
     const { slug, ...queryParams } = req.query
 
     if (queryParams.amount) {
