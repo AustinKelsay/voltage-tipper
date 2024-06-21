@@ -8,7 +8,14 @@ function encodeLnurl(url) {
 
 export default function handler(req, res) {
     runMiddleware(req, res, corsMiddleware);
-    const originalUrl = `${process.env.BACKEND_URL}/api/lnurl`
+
+    // Get the host from the request headers
+    const host = req.headers.host;
+
+    // Construct the base URL
+    const baseUrl = `https://${host}`;
+
+    const originalUrl = `${baseUrl}/api/lnurl`
     const encodedLnurl = encodeLnurl(originalUrl);
 
     res.status(200).json({

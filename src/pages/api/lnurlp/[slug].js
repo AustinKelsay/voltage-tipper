@@ -1,12 +1,17 @@
 import axios from 'axios'
 import { runMiddleware, corsMiddleware } from "@/utils/corsMiddleware";
 
-const BACKEND_URL = process.env.BACKEND_URL
 const HOST = process.env.NEXT_PUBLIC_HOST
 const MACAROON = process.env.NEXT_PUBLIC_READ_MACAROON
 
 export default async function handler(req, res) {
     await runMiddleware(req, res, corsMiddleware);
+
+    // Get the host from the request headers
+    const host = req.headers.host;
+
+    // Construct the base URL
+    const baseUrl = `https://${host}`;
 
     const { slug } = req.query
 
@@ -27,7 +32,7 @@ export default async function handler(req, res) {
         ];
 
         res.status(200).json({
-            callback: `${BACKEND_URL}/api/callback`,
+            callback: `${baseUrl}/api/callback`,
             maxSendable: 1000000,
             minSendable: 1000,
             metadata: JSON.stringify(metadata),
