@@ -18,7 +18,12 @@ const PastTips = () => {
                 }
             }).then((res) => {
                 if (res.data.invoices && res.data.invoices.length > 0) {
-                    const filteredTips = res.data.invoices.filter(inv => inv.memo.includes("voltage-tipper"));
+                    const filteredTips = res.data.invoices
+                        .filter(inv => inv.memo.includes("voltage-tipper"))
+                        .map(inv => ({
+                            ...inv,
+                            memo: inv.memo.replace("voltage-tipper", "").trim()
+                        }));
                     const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
                     setTips(sortedTips);
                 }
@@ -43,10 +48,13 @@ const PastTips = () => {
                 <DataTable value={tips} paginator rows={5} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="value" header="Amount"></Column>
                     <Column field="memo" header="Memo"></Column>
-                    <Column field="creation_date" header="Date" body={(rowData) => new Date(rowData.creation_date * 1000).toLocaleString()}></Column>
+                    <Column 
+                        field="creation_date" 
+                        header="Date" 
+                        body={(rowData) => new Date(rowData.creation_date * 1000).toLocaleString()}
+                    ></Column>
                 </DataTable>
-            )
-            }
+            )}
         </div>
     )
 }
