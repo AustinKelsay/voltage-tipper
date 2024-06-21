@@ -4,6 +4,7 @@ import TippingForm from "./TippingForm";
 import TippingDisplay from "./TippingDisplay";
 import PastTips from "./PastTips";
 import { useToast } from "@/hooks/useToast";
+import { Card } from 'primereact/card';
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON;
@@ -66,7 +67,7 @@ const TippingComponent = () => {
     }, []);
 
     return (
-        <div className="w-[50vw] flex flex-col justify-center p-4">
+        <Card className="w-[50vw] flex flex-col justify-center p-4">
             <TippingForm setInvoice={setInvoice} invoice={invoice} startPolling={startPolling} />
             {invoice ? (
                 <TippingDisplay
@@ -77,7 +78,7 @@ const TippingComponent = () => {
             ) : (
                 <PastTips />
             )}
-        </div>
+        </Card>
     );
 };
 
