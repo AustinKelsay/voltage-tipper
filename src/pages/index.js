@@ -57,7 +57,7 @@ export default function Home() {
         <>
           <div className="text-center mb-8 w-full max-w-2xl">
             <h1 className="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-              {nodeInfo?.alias}'s Tipping Page
+              {nodeInfo?.alias}&apos;s Tipping Page
             </h1>
             <div className="space-y-4">
               <div className="flex flex-col items-center">
