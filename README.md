@@ -26,7 +26,8 @@ To deploy, click the button below, create a free Vercel account if you don't hav
 The host is your Node's 'API endpoint' you can copy it from your Voltage Dashboard, be sure to include 'https://'. Example: `https://plebdev.m.voltageapp.io`
 
 #### Macaroons
-The Invoice and Read macaroons are authentication tokens that allows you to interact with your LND node's REST API with permissions for reading data, and creating invoices. You can also grab a "Admin" macaroon for permissions to spend but that is not required here since we are only receiving through this webapp, so your funds are safu. You can find your Macaroons in your Voltage Dashboard by visiting Manage Access -> Macaroon Bakery
+The Invoice and Read macaroons are authentication tokens that allows you to interact with your LND node's REST API with permissions for reading data, and creating invoices. You can also grab a "Admin" macaroon for permissions to spend but that is not required here since we are only receiving through this webapp, so your funds are safu. 
+**You can find your Macaroons in your Voltage Dashboard by visiting Manage Access -> Macaroon Bakery**
 
 ## API
 Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
