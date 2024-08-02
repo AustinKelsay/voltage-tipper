@@ -19,8 +19,8 @@ const TippingDisplay = ({ invoice, listenTimer, formatTime }) => {
             <div className="mx-auto w-fit m-4 border-2 rounded-lg bg-white p-2 cursor-pointer hover:opacity-75" onClick={copyToClipboard}>
                 <QRCodeSVG size={350} value={invoice} />
                 {/* Only show first 5 chars and last 5 chars with ... in the middle */}
-                <p className="text-black text-center text-xl">{invoice.slice(0, 10) + "..." + invoice.slice(-10)}</p>
-                <p className="text-center text-sm text-black">Click to copy</p>
+                <p className="text-black text-center my-0 text-xl">{invoice.slice(0, 10) + "..." + invoice.slice(-10)}</p>
+                <p className="text-center text-xs pt-0 text-black">Click to copy</p>
             </div>
         </div>
     );

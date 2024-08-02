@@ -67,7 +67,7 @@ const TippingComponent = () => {
     }, []);
 
     return (
-        <Card className="w-[50vw] flex flex-col justify-center p-4">
+        <Card className="md:w-[70vw] lg:w-[50vw] w-[90vw] flex flex-col justify-center p-4">
             <TippingForm setInvoice={setInvoice} invoice={invoice} startPolling={startPolling} />
             {invoice ? (
                 <TippingDisplay

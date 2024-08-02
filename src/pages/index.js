@@ -59,7 +59,7 @@ export default function Home() {
             <h1 className="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
               {nodeInfo?.alias}&apos;s Tipping Page
             </h1>
-            <div className="space-y-4">
+            <div className="w-full mx-auto max-sm:w-[90vw] space-y-4">
               <div className="flex flex-col items-center">
                 <span className="text-gray-400 text-sm mb-2">Lightning Address:</span>
                 <div className="p-inputgroup">
