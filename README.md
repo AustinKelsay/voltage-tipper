@@ -31,17 +31,17 @@ The Invoice and Read macaroons are authentication tokens that allows you to inte
 **You can find your Macaroons in your Voltage Dashboard by visiting Manage Access -> Macaroon Bakery**
 
 ## API
-Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
-`/api/lnurl`
+- `/api/lnurl`
+ - Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
 
-Returns bech32 encoded lnurlPay
-`/api/getlnurl`
+- `/api/getlnurl`
+ - Returns bech32 encoded lnurlPay
 
-This is your lightning address endpoint, returns lnurlPay response defined in [LUD-16](https://github.com/lnurl/luds/blob/luds/16.md)
-`/.well-known/lnurlp/{NodeAlias}`
+- `/.well-known/lnurlp/{NodeAlias}`
+ - This is your lightning address endpoint, returns lnurlPay response defined in [LUD-16](https://github.com/lnurl/luds/blob/luds/16.md)
 
-This is your callback endpoint that will return an invoice when `amount` query parameter is passed with millisat value
-`/api/callback?amount=21000`
+- `/api/callback?amount=21000`
+ - This is your callback endpoint that will return an invoice when `amount` query parameter is passed with millisat value
 
 
 ## Contributing
