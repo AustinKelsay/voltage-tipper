@@ -5,24 +5,17 @@ import { useToast } from "@/hooks/useToast";
 const TippingDisplay = ({ invoice, listenTimer, formatTime }) => {
     const { showToast } = useToast();
 
-    // const copyToClipboard = () => {
-    //     if (invoice) {
-    //         navigator.clipboard.writeText(invoice);
-    //         showToast('success', 'Copied', 'Invoice copied to clipboard');
-    //     }
-    // };
-
     const copyToClipboard = async () => {
         try {
-            await navigator.clipboard.writeText(invoice);
+        await navigator.clipboard.writeText(invoice);
+        showToast('success', 'Copied', 'Invoice copied to clipboard');
           if (window && window?.webln && window?.webln?.sendPayment) {
+            showToast('info', 'Opening WebLN Wallet', 'Opening WebLN Wallet to pay invoice');
             await window.webln.enable();
             const result = await window.webln.sendPayment(invoice);
             if (result && result?.preimage) {
               showToast('success', 'Success', 'Invoice paid');
             }
-          } else if (invoice) {
-            showToast('success', 'Copied', 'Invoice copied to clipboard');
           }
         } catch (err) {
           console.error('Failed to copy:', err);
