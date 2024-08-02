@@ -1,4 +1,4 @@
-# Voltage Tipper - under construction 🚧
+# Voltage Tipper ⚡
 A Simple Lightning tipping app template built with NextJS and Voltage.
 
 To deploy, click the button below, create a free Vercel account if you don't have one, fill in the required environment variables from your Voltage node, deploy, and everything should work!
