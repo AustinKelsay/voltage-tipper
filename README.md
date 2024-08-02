@@ -32,16 +32,16 @@ The Invoice and Read macaroons are authentication tokens that allows you to inte
 
 ## API
 - `/api/lnurl`
- - Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
+ Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
 
 - `/api/getlnurl`
- - Returns bech32 encoded lnurlPay
+Returns bech32 encoded lnurlPay
 
 - `/.well-known/lnurlp/{NodeAlias}`
- - This is your lightning address endpoint, returns lnurlPay response defined in [LUD-16](https://github.com/lnurl/luds/blob/luds/16.md)
+ This is your lightning address endpoint, returns lnurlPay response defined in [LUD-16](https://github.com/lnurl/luds/blob/luds/16.md)
 
 - `/api/callback?amount=21000`
- - This is your callback endpoint that will return an invoice when `amount` query parameter is passed with millisat value
+ This is your callback endpoint that will return an invoice when `amount` query parameter is passed with millisat value
 
 
 ## Contributing
