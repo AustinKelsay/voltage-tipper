@@ -19,7 +19,7 @@ To deploy, click the button below, create a free Vercel account if you don't hav
 ## Environment Variables
 - `NEXT_PUBLIC_HOST`: The host URL for your LND lightning node (not including port).
 - `NEXT_PUBLIC_INVOICE_MACAROON`: The invoice macaroon.
-- `NEXT_PUBLIC_READM_MACAROON`: The read-only macaroon.
+- `NEXT_PUBLIC_READ_MACAROON`: The read-only macaroon.
 
 ## API
 Returns lnurlPay response object defined in [LUD-06](https://github.com/lnurl/luds/blob/luds/06.md)
