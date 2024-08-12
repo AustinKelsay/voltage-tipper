@@ -19,7 +19,7 @@ const PastTips = () => {
             }).then((res) => {
                 if (res.data.invoices && res.data.invoices.length > 0) {
                     const filteredTips = res.data.invoices
-                        .filter(inv => inv.memo.includes("voltage-tipper"))
+                        .filter(inv => inv.memo.includes("voltage-tipper") && inv.state === "SETTLED")
                         .map(inv => ({
                             ...inv,
                             memo: inv.memo.replace("voltage-tipper", "").trim()
