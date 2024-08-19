@@ -18,13 +18,13 @@ const PastTips = () => {
                 }
             }).then((res) => {
                 if (res.data.invoices && res.data.invoices.length > 0) {
+                    console.log("res.data.invoices", res.data.invoices);
                     const filteredTips = res.data.invoices
                         .filter(inv => inv.memo.includes("voltage-tipper") && inv.state === "SETTLED")
                         .map(inv => ({
                             ...inv,
                             memo: inv.memo.replace("voltage-tipper", "").trim()
                         }));
-                    console.log("poll", filteredTips);
                     const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
                     setTips(sortedTips);
                 }
