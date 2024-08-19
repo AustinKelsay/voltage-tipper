@@ -36,6 +36,7 @@ const PastTips = () => {
                     const filteredTips = response.data.invoices
                         // Filter for settled invoices with the "voltage-tipper" memo
                         .filter(inv => inv.state === "SETTLED" && inv.memo.includes("voltage-tipper"))
+                        .reverse()
                         .map(inv => ({
                             ...inv,
                             // Remove the "voltage-tipper" text from the memo

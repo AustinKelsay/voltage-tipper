@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 const HOST = process.env.NEXT_PUBLIC_HOST;
 const INVOICE_MACAROON = process.env.NEXT_PUBLIC_INVOICE_MACAROON;
 
-const TippingForm = ({ setInvoice, invoice, startPolling }) => {
+const TippingForm = ({ setInvoice, invoice, startPolling, resetForm }) => {
     // State for amount and memo
     const [amount, setAmount] = useState(null);
     const [memo, setMemo] = useState("");
@@ -31,9 +31,19 @@ const TippingForm = ({ setInvoice, invoice, startPolling }) => {
             setInvoice(data.payment_request);
             const currentUnixTimestamp = Math.floor(Date.now() / 1000);
             startPolling(currentUnixTimestamp);
+            // Reset the form
+            setAmount(null);
+            setMemo("");
+            resetForm();
         } catch (error) {
             console.error(error);
         }
+    };
+
+    // Update resetForm to include the local state reset
+    resetForm = () => {
+        setAmount(null);
+        setMemo("");
     };
 
     return (

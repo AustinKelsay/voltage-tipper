@@ -62,6 +62,12 @@ const TippingComponent = () => {
         clearInterval(timerIntervalRef.current);
         setListenTimer(3600);
         setInvoice("");
+        resetForm(); // Call resetForm here
+    };
+
+    // Function to reset form
+    const resetForm = () => {
+        // This function will be passed to TippingForm
     };
 
     // Function to format time in HH:MM:SS
@@ -83,7 +89,7 @@ const TippingComponent = () => {
     return (
         <Card className="md:w-[70vw] lg:w-[50vw] w-[90vw] flex flex-col justify-center p-4">
             {/* Form for creating a new invoice */}
-            <TippingForm setInvoice={setInvoice} invoice={invoice} startPolling={startPolling} />
+            <TippingForm setInvoice={setInvoice} invoice={invoice} startPolling={startPolling} resetForm={resetForm} />
             {invoice ? (
                 // Display invoice and timer when an invoice exists
                 <TippingDisplay
