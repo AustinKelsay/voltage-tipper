@@ -19,8 +19,8 @@ const PastTips = () => {
             try {
                 // Get the last processed index from local storage
                 const lastProcessedIndex = localStorage.getItem('lastProcessedIndex') || '0';
-                // Calculate the timestamp for 3 months ago
-                const threeMonthsAgo = Math.floor(Date.now() / 1000) - 3 * 30 * 24 * 60 * 60;
+                // Calculate the timestamp for 1 month ago
+                const oneMonthAgo = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
 
                 // Make API request to get invoices
                 const response = await axios.get(`${HOST}/v1/invoices`, {
@@ -31,7 +31,7 @@ const PastTips = () => {
                         index_offset: lastProcessedIndex,
                         num_max_invoices: 1000,
                         reversed: true,
-                        creation_date_start: threeMonthsAgo
+                        creation_date_start: oneMonthAgo
                     }
                 });
 
