@@ -5,63 +5,58 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import 'primeicons/primeicons.css';
 
-// Get environment variables
-const HOST = process.env.NEXT_PUBLIC_HOST;
-const INVOICE_MACAROON = process.env.NEXT_PUBLIC_READ_MACAROON;
+// Get environment variables for LND node connection
+const HOST = process.env.NEXT_PUBLIC_HOST; // The host address of the LND node
+const INVOICE_MACAROON = process.env.NEXT_PUBLIC_READ_MACAROON; // Macaroon for authentication with read-only permissions
 
 const PastTips = () => {
     // State to store the list of tips
     const [tips, setTips] = useState([]);
 
     useEffect(() => {
-        // Function to fetch tips from the API
         const fetchTips = async () => {
             try {
-                // Get the last processed index from local storage
-                const lastProcessedIndex = localStorage.getItem('lastProcessedIndex') || '0';
-                // Calculate the timestamp for 1 month ago
-                const oneMonthAgo = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
-
-                // Make API request to get invoices
+                // Make a GET request to the LND invoices endpoint
                 const response = await axios.get(`${HOST}/v1/invoices`, {
                     headers: {
+                        // Include the macaroon in the request headers for authentication
                         "Grpc-Metadata-macaroon": INVOICE_MACAROON
                     },
                     params: {
-                        index_offset: lastProcessedIndex,
-                        num_max_invoices: 1000,
-                        reversed: true,
-                        creation_date_start: oneMonthAgo
+                        // Request parameters for the LND API
+                        pending_only: false, // Include both settled and unsettled invoices
+                        num_max_invoices: 1000, // Request up to 1000 invoices (adjust as needed)
+                        reversed: true // Get most recent invoices first
                     }
                 });
 
+                // Check if invoices were returned in the response
                 if (response.data.invoices && response.data.invoices.length > 0) {
-                    // Filter and process the invoices
+                    // Process and filter the invoices
                     const filteredTips = response.data.invoices
-                        .filter(inv => inv.memo.includes("voltage-tipper") && inv.state === "SETTLED")
+                        // Filter for settled invoices with the "voltage-tipper" memo
+                        .filter(inv => inv.state === "SETTLED" && inv.memo.includes("voltage-tipper"))
                         .map(inv => ({
                             ...inv,
+                            // Remove the "voltage-tipper" text from the memo
                             memo: inv.memo.replace("voltage-tipper", "").trim()
                         }));
-                    // Sort tips by creation date
-                    const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
-                    setTips(sortedTips);
                     
-                    // Update the last processed index in local storage
-                    if (response.data.last_index_offset) {
-                        localStorage.setItem('lastProcessedIndex', response.data.last_index_offset);
-                    }
+                    // Update the state with the filtered tips
+                    setTips(filteredTips);
                 }
             } catch (err) {
-                console.error(err);
+                console.error("Error fetching invoices from LND:", err);
             }
         };
 
-        // Fetch tips initially and set up an interval to fetch every 30 seconds
+        // Initial fetch of tips
         fetchTips();
-        const intervalId = setInterval(fetchTips, 30000);
 
-        // Clean up the interval on component unmount
+        // Set up an interval to fetch tips every minute
+        const intervalId = setInterval(fetchTips, 60000);
+
+        // Clean up the interval when the component unmounts
         return () => clearInterval(intervalId);
     }, []);
 
@@ -75,6 +70,7 @@ const PastTips = () => {
                     <Column 
                         field="creation_date" 
                         header="Date" 
+                        // Convert the Unix timestamp to a readable date string
                         body={(rowData) => new Date(rowData.creation_date * 1000).toLocaleString()}
                     ></Column>
                 </DataTable>
