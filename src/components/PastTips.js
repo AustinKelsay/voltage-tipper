@@ -24,6 +24,7 @@ const PastTips = () => {
                             ...inv,
                             memo: inv.memo.replace("voltage-tipper", "").trim()
                         }));
+                    console.log("poll", filteredTips);
                     const sortedTips = filteredTips.sort((a, b) => b.creation_date - a.creation_date);
                     setTips(sortedTips);
                 }
